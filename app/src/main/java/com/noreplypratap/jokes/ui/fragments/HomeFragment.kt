@@ -58,6 +58,11 @@ class HomeFragment : Fragment() {
 
         }
 
+        binding.btnReload.setOnClickListener {
+            startProgressBar()
+            apiViewModel.getJokesFromAPI()
+        }
+
         binding.btnSave.setOnClickListener {
             saveJoke?.let { it1 -> dbViewModel.saveJokesIntoDB(it1)
                 Log.d(Constants.TAG,"Saved To DB...... $it1")

@@ -23,4 +23,8 @@ class DbViewModel @Inject constructor(private val repository: Repository) : View
     fun deleteJokeFromDB(id : Int) = viewModelScope.launch {
         repository.deletejokeFromDB(id)
     }
+
+    fun deleteDB() = viewModelScope.launch{
+        repository.deleteDB()
+    }
 }

@@ -2,6 +2,7 @@ package com.noreplypratap.jokes.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.noreplypratap.jokes.constants.Constants
 import com.noreplypratap.jokes.databinding.FragmentSavedBinding
 import com.noreplypratap.jokes.utils.JokesAdapter
 import com.noreplypratap.jokes.viewmodel.DbViewModel
@@ -38,24 +40,44 @@ class SavedFragment : Fragment() {
             jokesAdapter = JokesAdapter(it)
             setupRecycler()
         })
+
+        binding.btnDeleteAll.setOnClickListener {
+
+            setupDialogBox(0,false)
+
+            Log.d(Constants.TAG,"DeletedAll.....")
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setupDialogBox(id : Int){
+    fun setupDialogBox(id : Int,boolean: Boolean){
         val builder = context?.let { AlertDialog.Builder(it) }
-        builder?.setTitle("Alert")
-        builder?.setMessage("Do you want to delete...")
-
-        builder?.setPositiveButton(android.R.string.yes) { dialog, which ->
-            Toast.makeText(context,
-                android.R.string.yes, Toast.LENGTH_SHORT).show()
-            dbViewModel.deleteJokeFromDB(id)
-            jokesAdapter.notifyDataSetChanged()
+        if (boolean){
+            builder?.setTitle("Alert")
+            builder?.setMessage("Do you want to delete this joke ...")
+        }else{
+            builder?.setTitle("Alert")
+            builder?.setMessage("Do you want to delete All ...")
         }
 
-        builder?.setNegativeButton(android.R.string.no) { dialog, which ->
+
+        builder?.setPositiveButton("Yes") { dialog, which ->
             Toast.makeText(context,
-                android.R.string.no, Toast.LENGTH_SHORT).show()
+                "Yes", Toast.LENGTH_SHORT).show()
+
+            if (boolean){
+                dbViewModel.deleteJokeFromDB(id)
+                jokesAdapter.notifyDataSetChanged()
+            }else{
+                dbViewModel.deleteDB()
+                jokesAdapter.notifyDataSetChanged()
+            }
+
+        }
+
+        builder?.setNegativeButton("No") { dialog, which ->
+            Toast.makeText(context,
+                "No", Toast.LENGTH_SHORT).show()
         }
         builder?.show()
     }
@@ -66,7 +88,7 @@ class SavedFragment : Fragment() {
             layoutManager = GridLayoutManager(activity,1)
         }
         jokesAdapter.setOnClickListener {
-            setupDialogBox(it.id)
+            setupDialogBox(it.id,true)
         }
 
     }

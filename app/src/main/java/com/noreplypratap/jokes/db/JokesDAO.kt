@@ -18,12 +18,11 @@ interface JokesDAO {
     @Update
     fun updateJokesData(jokesData: JokesData)
 
-    @Delete
-    fun dbdeleteJokesData(jokesData: JokesData)
+    @Query("DELETE FROM JokesData")
+    suspend fun deleteDB()
 
     @Query("DELETE FROM JokesData WHERE id = :id")
     suspend fun deleteJokesData(id : Int)
-
 
     @Query("SELECT * FROM JokesData")
     fun getJokesDataFromDB() : LiveData<List<JokesData>>

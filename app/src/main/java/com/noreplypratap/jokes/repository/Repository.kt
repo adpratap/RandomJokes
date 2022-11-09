@@ -18,4 +18,8 @@ class Repository @Inject constructor( private val apiService: APIService , priva
 
     suspend fun deletejokeFromDB(id : Int) = jokesDAO.deleteJokesData(id)
 
+    suspend fun deleteDB() {
+        jokesDAO.deleteDB()
+    }
+
 }
