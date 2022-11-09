@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="apijoke"
+            type="com.noreplypratap.jokes.viewmodel.APIViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.HomeFragment">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvOnlineData"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:textColor="#A10F0F"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:id="@+id/tvOnlinePunchLine"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="#FF9800"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_margin="18dp" />
+
+            <TextView
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="#A10F0F"
+                android:text="@{apijoke.jokes.data.setup}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:text="@{apijoke.jokes.data.punchline}"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="#FF9800"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_margin="18dp" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_height="wrap_content"
+                android:text="Save"/>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+</layout>
