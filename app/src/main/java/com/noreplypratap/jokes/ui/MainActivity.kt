@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
+        setupViewPager()
+    }
+
+    private fun setupViewPager() {
         binding.viewPager.adapter = ViewPagerAdapter(this)
         TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab , pos ->
             tab.text = when(pos){
@@ -30,4 +34,5 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
     }
+
 }

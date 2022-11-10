@@ -58,6 +58,7 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/tvJokeView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -68,6 +69,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvPunchLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
